@@ -27,6 +27,7 @@ You can also ask questions/query about your database.*/
  * What is the output? */
 
 /*__your answer here___*/
+/* Procedure 'raining' does not exist */
 
 /*You can defind facts with arguments. (just like a function with input variables)
  * It is just relationship between items.
@@ -40,19 +41,31 @@ likes(john,mary).
 /*Ask query: ?- likes(mary,food).*/
 
 /*__your answer here___*/
+/* true */
 
 /*OK, some KOANS about facts: */
 
 eats(fred,oranges).                           /* "Fred eats oranges" */
 /*__your answer here___*/                    /* "Fred eats T-bone steaks" */
-/*__your answer here___*/                           /* "Tony eats apples" */
-/*__your answer here___*/                         /* "John eats apples" */
+eats(fred,t-bone_steaks).
 
+/*__your answer here___*/                           /* "Tony eats apples" */
+eats(tony,apples).
+
+/*__your answer here___*/                         /* "John eats apples" */
+eats(john,apples).
 /*Ask some queries on the right side:
  * Does Fred eats T-bone steaks?
  * ?- eats(tony,pears). means what? What is the result?*/
 
 /*__your answer here___*/
+
+/* eats(fred,t-bone_steaks). */
+/* true */
+
+/* eats(tony,pears). */
+/* false */
+
 
 /*You can also link up two sentances with ,
  * Try query:
