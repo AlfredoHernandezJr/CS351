@@ -72,12 +72,14 @@ eats(john,apples).
  * ?- eats(fred,_X),_X=oranges
  * What is the output? What is the meaning of this query?*/
 /*__your answer here___*/
+/* returns true then seems to want an additional input from the user(?)*/
 
 age(ian,2).                   /*  Ian is 2 */
 
 /*will query ?- age(ian, two). give yes? Why?*/
 
 /*__your answer here___*/
+/* It returns false as two is not the same as 2, variable/written wise */
 
 /*************
  * Variables
@@ -95,6 +97,7 @@ age(ian,2).                   /*  Ian is 2 */
  *In other editors, you would type ; to represent show next result.*/
 
 /*__your answer here___*/
+/* FoodX = oranges, FoodX = t-bone_steaks */
 
 /***********
  * Rules
@@ -110,9 +113,13 @@ human(petter).  /*give a fact that petter is a human*/
 /*__your answer here___*/ /*Ask query: is petter mortal?*/
 /*What is the result of your query?*/
 /*__your answer here___*/
+/* true */
 
 /*__your answer here___*/ /*Ask query: who is mortal?*/
+/*  mortal(X). */
+
 /*__your answer here___*/ /*What is the result of your query?*/
+/* X = petter */
 
 /*One rule can have several variations.
  * The following example shows 3 ways that some thing is fun*/
@@ -134,30 +141,46 @@ red(ford_escort).
 blue(harley_davidson).
 
 /*__your answer here___*/ /*Ask query: is harley_davidson fun?*/
+/* fun(harley_davidson). */
+
 /*__your answer here___*/ /*What is the result of your query?*/
+/* true */
+
 /*What are the logical steps that Prolog took to find the answer for you?
  * Hint: start matching from the first fun clause.*/
 /*__your answer here___*/
+/* Checks if red or blue, then checks if its a car or bike depending on if its red or blue */
 
 /*__your answer here___*/ /*Ask query: What is fun?*/
+/* fun(X). */
+/* X = vw_beatle */
+/* X = ford_escort */
+/* X = harley_davidson */
+/* X = ice_cream */
 
 /****************
  * Recursion
  */
 /*some facts:*/
 move(home,taxi,halifax). /*__your answer here___*/
+/* true */
+
 move(halifax,train,gatwick). /*__your answer here___*/
+/* true */
+
 move(gatwick,plane,rome). /*__your answer here___*/
+/* true */
 
 /*on_route is a recursive predicate*/
 on_route(rome).
-on_route(Place):-       /*what does this mean?*/ /*__your answer here___*/
-	move(Place,_Method,NewPlace), /*__your answer here___*/
-	on_route(NewPlace).  /*__your answer here___*/
+on_route(Place):-       /*what does this mean?*/ /*__your answer here___*/ /* if */
+	move(Place,_Method,NewPlace), /*__your answer here___*/ /* and */
+	on_route(NewPlace).  /*__your answer here___*/ /* keeps calling until rome is the destination */
 
 /* Query ?- on_route(home). is asking whether you can reach rome from home*/
 /*What are the steps that Prolog can use to find the answer for you?*/
 /*__your answer here___*/
+/* calls move(home,taxi,halifax)., then move(halifax,train,gatwick)., and finally move(gatwick,plane,rome). to return true */
 
 /*Change _Method to Method, what will happen?*/
 /*By adding _ in front of a variable, we make it an anonymous variable and let the complier know 
@@ -169,31 +192,50 @@ on_route(Place):-       /*what does this mean?*/ /*__your answer here___*/
  */
 [a,b,c,d,e,f,g]. /*a list with simple facts*/
 /*__your answer here___*/ /*an empty list*/
+[].
+
 /*__your answer here___*/ /*a list with 3 names as facts*/
+[john, smith, doe].
 
 /*Just like F#, list in Prolog matches Head and Tail.*/
 p([H|T], H, T). /*bind/unify list [...] with head item H, and tail item T*/
 /*__your answer here___*/ /*What is the meaning of query ?-p([a,b,c], X, Y). ?*/
+/* Return the head represented by X and the tail represented by Y */
+
 /*__your answer here___*/ /*Output?*/
+/* X = a*/
+/* Y = [b, c] */
 
 /*write queries to cut H and T out from the above 3 lists.*/
 /*__your answer here___*/
+p([H|T], IgnoreHead, IgnoreTail).
 
 /*Search an item from a list, write down the meaning of each line:*/
 inList(Item,[Item|Rest]). /*__your answer here___*/
-inList(Item,[IgnoreHead|Tail]) :- /*__your answer here___*/
-    	inList(Item,Tail). /*__your answer here___*/
+/* Searches for Item within the list [Item|Rest] */
+
+inList(Item,[IgnoreHead|Tail]) :- /*__your answer here___*/ /* Ignore the head of the list if  */
+    	inList(Item,Tail). /*__your answer here___*/ /* the searched item is the head of the list */
 
 /*Write a query that test if apple is in the list [apple, pear, banana]*/
 /*__your answer here___*/
+/* inList(apple, [apple, pear, banana]). */
+/* true */
+
 /*What are the steps that Prolog can use to find the answer for you?*/
 /*__your answer here___*/
+/* Checks if the item is the head or tail, then checks the rest of the body of the list */
+
 /*Write a query that test if apple is in the list [pear, apple, banana]*/
 /*__your answer here___*/
+/* inList(apple, [pear, apple, banana]). */
+/* true */
+
 /*What are the steps that Prolog can use to find the answer for you?*/
 /*__your answer here___*/
+/* Checks if the item is the head then checks if it belongs to the body */
 
 /*Does this example reminds you of some thing from F#?*/
 /*__your answer here___*/
-
+/* Overloading functions */
   
